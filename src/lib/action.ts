@@ -282,34 +282,63 @@ async function getProducts() {
 }
 
 async function createProduct(formData: FormData) {
-  // const name = formData.get("name");
-  // const slug = formData.get("slug");
-  // const description = formData.get("description");
-  // const isActive = formData.get("isActive");
-  // const category = formData.get("category");
-  // const subCategory = formData.get("subCategory");
-  // const brand = formData.get("brand");
-  // const thumbnailFile = formData.get("thumbnail");
-  // const imagesFiles = formData.getAll("images");
-  // const thumbnail = thumbnailFile as File;
-  // const images = imagesFiles as File[];
+  const title = formData.get("title");
+  const slug = formData.get("slug");
+  const description = formData.get("description");
+  const isActive = formData.get("isActive");
+  const category = formData.get("category");
+  const subCategory = formData.get("subCategory");
+  const brand = formData.get("brand");
+  const thumbnailFile = formData.get("thumbnail");
+  const imagesFiles = formData.getAll("images");
+  const thumbnail = thumbnailFile as File;
+  const images = imagesFiles as File[];
+
+  console.log({
+    title,
+    slug,
+    description,
+    isActive,
+    category,
+    subCategory,
+    brand,
+    thumbnail,
+    images,
+  });
+
   const c = await cookies();
   const access = c.get("accessToken")?.value;
   if (access) {
-    const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
-      method: "POST",
-      headers: {
-        Authorization: access,
-      },
-      // body: JSON.stringify({ name, slug, description, isActive, category, subCategory, brand, thumbnail, images }),
-      body: formData,
-    });
-    console.log(result);
-    const { data } = await result.json();
-    console.log("data", data);
-    if (data) {
-      console.log("Product created successfully");
-      return data;
+    try {
+      const result = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/products`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: access,
+          },
+          body: JSON.stringify({
+            title,
+            slug,
+            description,
+            isActive,
+            category,
+            subCategory,
+            brand,
+            thumbnail,
+            images,
+          }),
+        }
+      );
+
+      console.log(result);
+      const { data } = await result.json();
+      if (data) {
+        console.log("Product created successfully");
+        return data;
+      }
+    } catch (error) {
+      console.error("Error creating product:", error);
     }
   }
 }
