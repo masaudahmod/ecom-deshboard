@@ -97,7 +97,7 @@ const page: FC = async () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              {/* <Input name="subCategory" placeholder="Product subCategory" value={'678a4d43d53b4f78a3c6f9d5'}></Input> */}
+              
             </div>
             <div className="flex flex-col gap-2">
               <Label>Product Brand</Label>
