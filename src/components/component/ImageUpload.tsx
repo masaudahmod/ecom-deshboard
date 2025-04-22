@@ -28,7 +28,7 @@ export default function ImageUpload({
         reader.onloadend = () => {
           newPreviews.push(reader.result as string);
           if (newPreviews.length === files.length) {
-            setImagePreviews((prev) => [...prev, ...newPreviews]); // আগের ইমেজগুলো রেখে নতুনগুলো যোগ করবো
+            setImagePreviews(() => [...newPreviews]); // আগের ইমেজগুলো রেখে নতুনগুলো যোগ করবো
           }
         };
         reader.readAsDataURL(files[i]);

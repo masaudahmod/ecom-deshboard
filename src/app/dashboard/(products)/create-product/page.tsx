@@ -79,7 +79,7 @@ const page: FC = async () => {
             </div>
             <div className="flex flex-col gap-2">
               <Label>Product sub category</Label>
-              <Select name="subCategory">
+              <Select name="subcategory">
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select a subCategory" />
                 </SelectTrigger>

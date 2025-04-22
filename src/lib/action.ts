@@ -330,8 +330,6 @@ async function getProducts() {
 // }
 
 async function createProduct(formData: FormData) {
-  console.log("this is a formdata from frontend ###################################################################################");  
-  
   const data = new FormData();
 
   data.append("title", formData.get("title") as string);
@@ -339,8 +337,8 @@ async function createProduct(formData: FormData) {
   data.append("description", formData.get("description") as string);
   data.append("isActive", formData.get("isActive") as string);
   data.append("category", formData.get("category") as string);
-  data.append("subCategory", formData.get("subCategory") as string);
-  data.append("brand", formData.get("brand") as string);
+  data.append("subcategory", formData.get("subcategory") as string);
+  // data.append("brand", formData.get("brand") as string);
 
   const thumbnail = formData.get("thumbnail") as File;
   data.append("thumbnail", thumbnail);
@@ -350,8 +348,6 @@ async function createProduct(formData: FormData) {
     data.append("images", img);
   });
 
-  console.log(data);
-  
   const c = await cookies();
   const access = c.get("accessToken")?.value;
 
@@ -359,22 +355,15 @@ async function createProduct(formData: FormData) {
     const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/products`, {
       method: "POST",
       headers: {
-        Authorization: access || "",
+        // Authorization: access || "",
+        Authorization: `Bearer ${access}`,
       },
       body: data,
     });
-
-    console.log("result", result);
-    if (!result.ok) {
-      throw new Error("Failed to create product");
-    }
-
     const resData = await result.json();
-    console.log("resData", resData);
-
     if (resData?.data) {
-      console.log("✅ Product created successfully", resData.data);
-      // return resData.data;
+      console.log("✅ Product created successfully");
+      return resData.data;
     }
   } catch (error) {
     console.error("❌ Error creating product:", error);
