@@ -1,4 +1,4 @@
-import ImageUpload from "@/components/component/ImageUpload";
+// import ImageUpload from "@/components/component/ImageUpload";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -108,6 +108,7 @@ const page: FC = async () => {
               <Input
                 type="file"
                 name="thumbnail"
+                accept="image/*"
                 placeholder="Product Thumbnail"
               />
             </div>
@@ -126,7 +127,17 @@ const page: FC = async () => {
               </Select>
             </div>
             
-            <ImageUpload label="Product Images" className="md:col-span-2" />
+            {/* <ImageUpload label="Product Images" className="md:col-span-2" /> */}
+            <div className="flex flex-col gap-2 col-span-2">
+              <Label>Product Images</Label>
+              <Input
+                type="file"
+                name="images"
+                placeholder="Product Images"
+                multiple
+                accept="image/*"
+              />
+            </div>
           </div>
           <div className="flex items-center justify-center">
             <button

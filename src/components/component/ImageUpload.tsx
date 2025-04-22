@@ -18,7 +18,6 @@ export default function ImageUpload({
 }: ImageUploadProps) {
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
-  // Image Change Handler for multiple images
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -28,7 +27,7 @@ export default function ImageUpload({
         reader.onloadend = () => {
           newPreviews.push(reader.result as string);
           if (newPreviews.length === files.length) {
-            setImagePreviews(() => [...newPreviews]); // আগের ইমেজগুলো রেখে নতুনগুলো যোগ করবো
+            setImagePreviews(() => [...newPreviews]);
           }
         };
         reader.readAsDataURL(files[i]);
@@ -36,7 +35,6 @@ export default function ImageUpload({
     }
   };
 
-  // Image Delete Handler
   const handleDeleteImage = (index: number) => {
     setImagePreviews((prev) => prev.filter((_, i) => i !== index));
   };
