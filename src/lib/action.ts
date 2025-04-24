@@ -117,7 +117,7 @@ async function createCategory(formData: FormData) {
   const slug = formData.get("slug");
   const description = formData.get("description");
   const thumbnail = formData.get("thumbnail") as File;
-  const isActive = formData.get("isActive") === "on" ? true : false;
+  const isActive = formData.get("isActive")
   if (access) {
     try {
       const result = await fetch(

@@ -13,14 +13,13 @@ interface PageProps {
 const Page: FC<PageProps> = async ({ params }) => {
   const { name } = await params;
   const categoryObject  = await getCategory(name);
-  
   const category = categoryObject?.category;
-  
+  const categoryName = decodeURI(name);
   return (
     <>
       <div className="text-2xl font-semibold text-center flex gap-5 justify-center items-center flex-col">
         {" "}
-        <h2 className="capitalize">{`Manage '${name}' Category`}</h2>
+        <h2 className="capitalize">{`Manage '${categoryName}' Category`}</h2>
         <form
           action={updateCategory}
           className="space-y-4 w-full max-w-md"
