@@ -1,8 +1,11 @@
+import React from "react";
+
+import { Button } from "@/components/ui/button";
 import { getAllCategories } from "@/lib/action";
 import Link from "next/link";
 
 interface Category {
-  id: number;
+  _id: number;
   name: string;
   slug: string;
   description: string;
@@ -21,11 +24,11 @@ export default async function Page() {
             allCategories.categories.map(
               (category: Category, index: number) => (
                 <div
-                  key={`${category.id}-${index}`}
+                  key={`${category._id}-${index}`}
                   className="capitalize grid grid-cols-4 gap-4 p-2 border-b"
                 >
                   <h2 className="text-lg font-semibold">{category.name}</h2>
-                  <p>{category.description}</p>
+                  {/* <p>{category.description}</p> */}
                   <p>{category.isActive ? "Active" : "Inactive"}</p>
                   <Link
                     href={`/dashboard/manage-categories/${category.name}`}
@@ -33,6 +36,15 @@ export default async function Page() {
                   >
                     View
                   </Link>
+                  <Button
+                  // onClick={async() => {
+                  //   await deleteCategory(category._id);
+                  // }}
+                  type="button"
+                    className="text-blue-500 hover:underline cursor-pointer"
+                  >
+                    Delete
+                  </Button>
                 </div>
               )
             )

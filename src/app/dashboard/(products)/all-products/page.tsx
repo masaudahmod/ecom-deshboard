@@ -9,6 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface Product {
   _id: string;
@@ -43,9 +44,9 @@ const page: FC = async () => {
                   <Button className="cursor-pointer hover:bg-slate-700 hover:text-white">
                     Delete
                   </Button>
-                  <Button className="cursor-pointer hover:bg-slate-700 hover:text-white">
+                  <Link href={`/dashboard/manage-product/${product._id}`} className=" px-5 transition-all duration-300 py-2 bg-slate-200 text-black rounded-lg cursor-pointer hover:bg-slate-700 hover:text-white">
                     View
-                  </Button>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

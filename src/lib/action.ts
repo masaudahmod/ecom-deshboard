@@ -117,7 +117,7 @@ async function createCategory(formData: FormData) {
   const slug = formData.get("slug");
   const description = formData.get("description");
   const thumbnail = formData.get("thumbnail") as File;
-  const isActive = formData.get("isActive")
+  const isActive = formData.get("isActive");
   if (access) {
     try {
       const result = await fetch(
@@ -191,27 +191,6 @@ async function getCategory(name: string) {
   }
 }
 
-async function getSubCategories() {
-  try {
-    const result = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/subcategories`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const { data } = await result.json();
-    if (data) {
-      console.log("Sub Categories fetched successfully.");
-      return data;
-    }
-  } catch (error) {
-    console.error("Error fetching category:", error);
-  }
-}
-
 async function updateCategory(formData: FormData) {
   const c = await cookies();
   const access = c.get("accessToken")?.value;
@@ -260,6 +239,54 @@ async function updateCategory(formData: FormData) {
     }
   } catch (error) {
     console.error("Error updating category:", error);
+  }
+}
+
+async function deleteCategory(id: number) {
+  const c = await cookies();
+  const access = c.get("accessToken")?.value;
+  if (access) {
+    try {
+      const result = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/categories/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access}`,
+          },
+        }
+      );
+      console.log(result);
+      const data = await result.json();
+      if (data) {
+        console.log("Category deleted successfully.");
+        // return data;
+      }
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
+  }
+}
+
+async function getSubCategories() {
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/subcategories`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const { data } = await result.json();
+    if (data) {
+      console.log("Sub Categories fetched successfully.");
+      return data;
+    }
+  } catch (error) {
+    console.error("Error fetching category:", error);
   }
 }
 
@@ -377,8 +404,9 @@ export {
   createCategory,
   getAllCategories,
   getCategory,
-  getSubCategories,
   updateCategory,
+  deleteCategory,
+  getSubCategories,
   getProducts,
   createProduct,
 };
