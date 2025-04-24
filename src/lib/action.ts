@@ -308,6 +308,27 @@ async function getProducts() {
   }
 }
 
+async function getProduct(id: string) {
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/products/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const { data } = await result.json();
+    if (data) {
+      console.log("Product fetched successfully.");
+      return data;
+    }
+  } catch (error) {
+    console.error("Error fetching product:", error);
+  }
+}
+
 // async function createProduct(formData: FormData) {
 //   const title = formData.get("title");
 //   const slug = formData.get("slug");
@@ -408,5 +429,6 @@ export {
   deleteCategory,
   getSubCategories,
   getProducts,
+  getProduct,
   createProduct,
 };
