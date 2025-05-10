@@ -3,9 +3,7 @@
 import * as React from "react";
 import {
   AudioWaveform,
-  Command,
   Frame,
-  GalleryVerticalEnd,
   Map,
   PieChart,
   Settings2,
@@ -27,19 +25,9 @@ import {
 const data = {
   teams: [
     {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
+      name: "E-commerce",
+      logo: Frame,
       plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
     },
   ],
   navMain: [
@@ -134,6 +122,11 @@ const data = {
       url: "#",
       icon: Map,
     },
+    {
+      name: "Home",
+      url: "/",
+      icon: AudioWaveform,
+    }
   ],
 };
 

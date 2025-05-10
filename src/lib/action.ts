@@ -386,6 +386,7 @@ async function createProduct(formData: FormData) {
   data.append("isActive", formData.get("isActive") as string);
   data.append("category", formData.get("category") as string);
   data.append("subcategory", formData.get("subcategory") as string);
+  data.append("price", Number(formData.get("price") as string).toString());
   // data.append("brand", formData.get("brand") as string);
 
   const thumbnail = formData.get("thumbnail") as File;

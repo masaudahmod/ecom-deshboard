@@ -10,7 +10,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createProduct, getAllCategories, getSubCategories } from "@/lib/action";
+import {
+  createProduct,
+  getAllCategories,
+  getSubCategories,
+} from "@/lib/action";
 import { FC } from "react";
 
 interface Category {
@@ -35,7 +39,7 @@ const page: FC = async () => {
 
   const getAllSubCategories = await getSubCategories();
   const subCategories = getAllSubCategories?.subcategories;
-  
+
   return (
     <>
       <section className="w-full max-w-4xl mx-auto">
@@ -97,7 +101,6 @@ const page: FC = async () => {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              
             </div>
             <div className="flex flex-col gap-2">
               <Label>Product Brand</Label>
@@ -126,9 +129,9 @@ const page: FC = async () => {
                 </SelectContent>
               </Select>
             </div>
-            
+
             {/* <ImageUpload label="Product Images" className="md:col-span-2" /> */}
-            <div className="flex flex-col gap-2 col-span-2">
+            <div className="flex flex-col gap-2">
               <Label>Product Images</Label>
               <Input
                 type="file"
@@ -137,6 +140,10 @@ const page: FC = async () => {
                 multiple
                 accept="image/*"
               />
+            </div>
+            <div className="flex flex-col gap-2">
+              <Label>Product Price</Label>
+              <Input name="price" type="number" placeholder="Product Price" />
             </div>
           </div>
           <div className="flex items-center justify-center">
