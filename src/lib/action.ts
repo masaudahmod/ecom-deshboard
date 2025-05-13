@@ -88,7 +88,6 @@ async function logout() {
 
 async function getUser() {
   const c = await cookies();
-
   const access = c.get("accessToken")?.value;
   if (access) {
     try {
@@ -97,7 +96,6 @@ async function getUser() {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${access}`,
-          // Authorization: access,
         },
       });
       const {
