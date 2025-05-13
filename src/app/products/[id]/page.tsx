@@ -9,10 +9,12 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Link from "next/link";
 
 interface Product {
   _id: string;
@@ -30,8 +32,7 @@ export default function ProductDetailsPage() {
   const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [quantity, setQuantity] = useState(1);
-  const [open, setOpen] = useState(false); // Sheet toggle
-
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     const fetchProduct = async () => {
       const data = await getProduct(id?.toString() || "");
@@ -107,36 +108,43 @@ export default function ProductDetailsPage() {
             <SheetContent>
               <SheetHeader>
                 <SheetTitle>🛒 Products added !</SheetTitle>
-                <SheetDescription className="flex flex-col h-full justify-between">
-                  <div className="flex items-center gap-4 mt-4">
-                    <Image
-                      src={product.thumbnail?.url}
-                      alt={product.title}
-                      width={80}
-                      height={80}
-                      className="rounded"
-                    />
-                    <div>
-                      <p className="font-semibold">{product.title}</p>
-                      <p>Quantity: {quantity}</p>
-                      <p>Price: ${product.price * quantity}</p>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 flex gap-4 bottom-10">
-                    <Button className=" capitalize text-black w-full cursor-pointer">
-                      See Cart
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="w-full capitalize"
-                      onClick={() => setOpen(false)}
-                    >
-                      Continue Shopping
-                    </Button>
-                  </div>
-                </SheetDescription>
               </SheetHeader>
+
+              <SheetDescription>
+                <div className="flex items-center px-5 gap-4 mt-4">
+                  <Image
+                    src={product.thumbnail?.url}
+                    alt={product.title}
+                    width={80}
+                    height={80}
+                    className="rounded"
+                  />
+                  <div>
+                    <p className="font-semibold">{product.title}</p>
+                    <p>Quantity: {quantity}</p>
+                    <p>Price: ${product.price * quantity}</p>
+                  </div>
+                </div>
+              </SheetDescription>
+              <SheetFooter>
+                <Button
+                  className="bg-green-600 hover:bg-green-700 cursor-pointer text-white"
+                  onClick={() => setOpen(false)}
+                >
+                  <Link
+                    href="/products/view-cart"
+                    className=" capitalize text-black w-full cursor-pointer"
+                  >
+                    view Cart
+                  </Link>
+                </Button>
+                <Link
+                  href="/products/checkout"
+                  className=" capitalize text-white bg-green-600 hover:bg-green-800 py-2 text-center rounded-xl w-full cursor-pointer"
+                >
+                  Checkout
+                </Link>
+              </SheetFooter>
             </SheetContent>
           </Sheet>
         </div>
