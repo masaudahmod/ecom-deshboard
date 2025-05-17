@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import React, { FC, useState } from 'react';
 
 const Page: FC = () => {
@@ -97,9 +98,9 @@ const Page: FC = () => {
           <span>${total.toFixed(2)}</span>
         </div>
 
-        <button className="w-full bg-green-600 text-white py-3 rounded cursor-pointer hover:bg-green-400 hover:text-black">
+        <Link href="/products/checkout" className="bg-green-600 text-white p-3 rounded cursor-pointer hover:bg-green-400 hover:text-black">
           PROCEED TO CHECKOUT
-        </button>
+        </Link>
       </div>
     </div>
   );
